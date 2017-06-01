@@ -2,6 +2,7 @@ defmodule Shortbot.Server do
   
   use GenServer
   
+  @shortener_api Application.get_env(:shortbot, :shortener_api)
   @moduledoc """
   Documentation for Shortbot.
   """
@@ -70,7 +71,7 @@ defmodule Shortbot.Server do
       {:reply, "http://some.url", []}
   """
   def handle_call({:make_shorter, url}, _from, _state) do
-    {:reply, url, []}
+    {:reply, @shortener_api.get_short(url), []}
   end
 
   @doc ~S"""
@@ -93,7 +94,7 @@ defmodule Shortbot.Server do
       {:noreply, ["http://some.url"]}
   """
   def handle_cast({:send_shorter, url}, _state) do
-    {:noreply, [url]}
+    {:noreply, [@shortener_api.get_short(url)]}
   end
 
 end
