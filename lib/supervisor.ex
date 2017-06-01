@@ -1,5 +1,9 @@
 defmodule Shortbot.Supervisor do
 
+  @moduledoc """
+  Supervisor for Shortbot.
+  """
+  
   use Supervisor
   
   def start_link do

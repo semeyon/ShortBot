@@ -1,5 +1,9 @@
 defmodule Shortbot do
 
+  @moduledoc """
+  Bootstrap of application
+  """
+
   use Application
 
   def start(_type, _args) do

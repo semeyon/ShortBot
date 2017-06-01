@@ -1,12 +1,13 @@
 defmodule Shortbot.SlackRtm do
+    
+  @moduledoc """
+  Slack bot module
+  """
   use Slack
   use GenServer
   require Logger
 
   @slack_token Application.get_env(:shortbot, :slack_token)
-  @moduledoc """
-  Documentation for Shortbot.
-  """
   
   # API
   def start_link do

@@ -1,11 +1,12 @@
 defmodule Shortbot.Server do
   
-  use GenServer
-  
-  @shortener_api Application.get_env(:shortbot, :shortener_api)
   @moduledoc """
   Documentation for Shortbot.
   """
+
+  use GenServer
+  
+  @shortener_api Application.get_env(:shortbot, :shortener_api)
   
   # API
   def start_link do
