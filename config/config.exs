@@ -3,7 +3,8 @@
 use Mix.Config
 
 # TODO: Move to the secret file
-config :shortbot, slack_key: "Key"
+config :shortbot, 
+    slack_token: System.get_env("SLACK_TOKEN")
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this

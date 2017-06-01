@@ -32,6 +32,9 @@ defmodule Shortbot.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:httpoison, "~> 0.11.1"}]
+    [
+      {:httpoison, "~> 0.11.1"},
+      {:slack, "~> 0.11.0"}
+    ]
   end
 end

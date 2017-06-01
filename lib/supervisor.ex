@@ -8,7 +8,8 @@ defmodule Shortbot.Supervisor do
 
   def init(_) do
     children = [
-      worker(Shortbot.Server, [])
+      worker(Shortbot.Server, []),
+      worker(Shortbot.SlackRtm, [])
     ]
     supervise(children, strategy: :one_for_one)
   end
