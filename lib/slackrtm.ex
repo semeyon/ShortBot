@@ -22,6 +22,7 @@ defmodule Shortbot.SlackRtm do
   end
 
   def handle_event(message = %{type: "message"}, slack, state) do
+    IO.puts inspect message
     shortener = Process.whereis(:shortener)
     send_message("I got a message!", message.channel, slack)
     short_url = Shortbot.Server.make_shorter(shortener, "http://ixbt.com")
