@@ -1,19 +1,9 @@
 # Shortbot
+Very simple elixir based slack bot that doing one very simple thing: make short version on urls using thelink.la service.
 
-**TODO: Add description**
-
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `shortbot` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [{:shortbot, "~> 0.1.0"}]
-end
+How to use:
+```SLACK_TOKEN="<slactocken>"
+mix run --no-halt
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/shortbot](https://hexdocs.pm/shortbot).
-
+Contacts:[semeyon@speople.pro](email:semeyon@speople.pro)

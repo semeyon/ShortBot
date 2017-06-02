@@ -3,7 +3,7 @@ defmodule Shortbot.Shortener do
   @moduledoc """
   Module to make a short url.
   """
-
+  require Logger
   @doc ~S"""
   Make a short version from the url. But this is a mock, so its return the same url.
 
@@ -14,7 +14,8 @@ defmodule Shortbot.Shortener do
   """
   @spec get_short(String) :: String
   def get_short(url) do
-    case HTTPoison.get("http://thelink.la/api-shorten.php?url=?" <> url) do
+    Logger.info("http://thelink.la/api-shorten.php?url=" <> url)
+    case HTTPoison.get("http://thelink.la/api-shorten.php?url=" <> url) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         body
       {:error, %HTTPoison.Error{reason: reason}} ->
