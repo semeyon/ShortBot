@@ -6,6 +6,7 @@ defmodule Shortbot.SlackRtm do
   use Slack
   use GenServer
   require Logger
+  import Shortbot.UriValidation
 
   @slack_token Application.get_env(:shortbot, :slack_token)
   
@@ -23,24 +24,33 @@ defmodule Shortbot.SlackRtm do
     send_message(text, message.channel, slack)
   end
 
-  def send_url_text(message, slack) do
-    shortener = Process.whereis(:shortener)
-    l = String.split(message.text)
+  def parse_out_url(text) do
+    l = String.split(text)
     if Kernel.length(l) >= 3 do
       {e, _} = List.pop_at(l, 2)
-      url = String.replace(e, ["<", ">"], "")
+      url = e |> String.replace(["<", ">"], "")
       url = if String.last(url) !== "/" do
         url <> "/"
       end
-      case Shortbot.UriValidation.validate_uri(url) do
-        {:error, _ } -> 
-          send_message("Wrong url format!", message.channel, slack)
-        {:ok, _ } ->
-          short_url = Shortbot.Server.make_shorter(shortener, url)
-          send_message(short_url, message.channel, slack)
-      end
+      {:ok, url}
     else
-      send_message("Wrong url format!", message.channel, slack)
+      :error
+    end
+  end
+
+  def send_url_text(message, slack) do
+    case parse_out_url(message.text) do
+      {:ok, url} ->
+        case validate_uri(url) do
+          {:error, _ } -> 
+            send_message("Wrong url format!", message.channel, slack)
+          {:ok, _ } ->
+            shortener = Process.whereis(:shortener)
+            short_url = Shortbot.Server.make_shorter(shortener, url)
+            send_message(short_url, message.channel, slack)
+        end
+      :error -> 
+        send_message("Wrong url format!", message.channel, slack)
     end
   end
 
