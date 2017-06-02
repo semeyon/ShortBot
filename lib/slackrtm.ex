@@ -47,6 +47,7 @@ defmodule Shortbot.SlackRtm do
           {:ok, _ } ->
             shortener = Process.whereis(:shortener)
             short_url = Shortbot.Server.make_shorter(shortener, url)
+            Logger.info "Make short #{url} -> #{short_url}"
             send_message(short_url, message.channel, slack)
         end
       :error -> 
@@ -55,7 +56,7 @@ defmodule Shortbot.SlackRtm do
   end
 
   def handle_connect(slack, state) do
-    IO.puts "Connected as #{slack.me.name}"
+    Logger.info "Connected as #{slack.me.name}"
     send_message("I'm back!", "#iam", slack)
     {:ok, state}
   end
@@ -80,7 +81,6 @@ defmodule Shortbot.SlackRtm do
   def handle_event(_, _, state), do: {:ok, state}
 
   def handle_info({:message, text, channel}, slack, state) do
-    IO.puts "Sending your message, captain!"
     send_message(text, channel, slack)
     {:ok, state}
   end

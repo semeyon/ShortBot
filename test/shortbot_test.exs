@@ -5,7 +5,6 @@ defmodule ShortbotTest do
   doctest Shortbot.Shortener
   doctest Shortbot.ShortenerLocal
   doctest Shortbot.UriValidation
-  #doctest Shortbot.SlackRtm
 
   test "the truth" do
     assert 1 + 1 == 2
