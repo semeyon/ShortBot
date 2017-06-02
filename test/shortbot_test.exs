@@ -4,7 +4,7 @@ defmodule ShortbotTest do
   doctest Shortbot.Server
   doctest Shortbot.Shortener
   doctest Shortbot.ShortenerLocal
-  doctest Shortbot.UriValidation
+  doctest Shortbot.UriHandler
 
   test "the truth" do
     assert 1 + 1 == 2

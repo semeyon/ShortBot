@@ -6,7 +6,7 @@ defmodule Shortbot.SlackRtm do
   use Slack
   use GenServer
   require Logger
-  import Shortbot.UriValidation
+  import Shortbot.UriHandler
 
   @slack_token Application.get_env(:shortbot, :slack_token)
   
@@ -24,19 +24,19 @@ defmodule Shortbot.SlackRtm do
     send_message(text, message.channel, slack)
   end
 
-  def parse_out_url(text) do
-    l = String.split(text)
-    if Kernel.length(l) >= 3 do
-      {e, _} = List.pop_at(l, 2)
-      url = e |> String.replace(["<", ">"], "")
-      url = if String.last(url) !== "/" do
-        url <> "/"
-      end
-      {:ok, url}
-    else
-      :error
-    end
-  end
+  # def parse_out_url(text) do
+  #   l = String.split(text)
+  #   if Kernel.length(l) >= 3 do
+  #     {e, _} = List.pop_at(l, 2)
+  #     url = e |> String.replace(["<", ">"], "")
+  #     url = if String.last(url) !== "/" do
+  #       url <> "/"
+  #     end
+  #     {:ok, url}
+  #   else
+  #     :error
+  #   end
+  # end
 
   def send_url_text(message, slack) do
     case parse_out_url(message.text) do
