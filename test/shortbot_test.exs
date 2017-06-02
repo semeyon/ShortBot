@@ -4,6 +4,7 @@ defmodule ShortbotTest do
   doctest Shortbot.Server
   doctest Shortbot.Shortener
   doctest Shortbot.ShortenerLocal
+  # doctest Shortbot.UriValidation
   #doctest Shortbot.SlackRtm
 
   test "the truth" do
